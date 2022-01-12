@@ -1,12 +1,10 @@
 using UnityEngine;
 using Scripts.Utils;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class RedlineTriggerHandler : MonoBehaviour
 {   
     [SerializeField] int _scoreCounter;
-    [SerializeField] TextMeshProUGUI _scoreText;
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Cube")
@@ -14,6 +12,8 @@ public class RedlineTriggerHandler : MonoBehaviour
         else   
             other.gameObject.tag = "Cube";   
             DataHolder._score = _scoreCounter++;
-            _scoreText.text = _scoreCounter.ToString(); 
+
+            GlobalEventManager.SendIncrementMove(_scoreCounter);
+            
     }
 }
